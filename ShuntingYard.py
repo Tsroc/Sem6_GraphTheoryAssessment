@@ -7,52 +7,54 @@ def runFunction():
 	"""
 	Shunting Yard Algorithm
 	"""
-	#str = "2+5*4"
-	#operatorList = ["+", "-", "*", "/"]
-	str = "W.h.a.l.e.a*"
-	operatorList = [".", "|", "*"];
+	# Operator List
+	prec = {'*': 100, '.': 80, '|': 60, ')': 40, '(': 20}
 	
-	tokenList = []
-	operatorStack = []
-	outputQueue = []
+	# The input
+	infix = "(a|b).c*"
+	print("Input is " + infix)
+	# Expected output: "ab|c*."
 	
-	# add str to tokenList
-	'''
-	for char in str:
-		tokenList.append(char)
-	#test tokenList
-	'''
-	'''
-	for token in tokenList:
-		print(token)
-	'''
-	#add token to operatorStack & outputQueue
-	for token in str:
-		if token in operatorList:
-			operatorStack.append(token)
-		else:
-			outputQueue.append(token)
+	# Covert input to a stack-ish list.
+	infix = list(infix)[::-1]
 	
-	#print operatorStack
-	'''
-	print("Operator Stack:")
-	for token in operatorStack:
-		print(token)
+	# Operator stack.
+	opers = []
+	# Output list.
+	postfix = []
 	
-	print("Output Queue:")
-	for token in outputQueue:
-		print(token)
-	'''
+	# Loop though the input one character at a time.
+	while infix:
+		# Pop a chracter from the inpit.
+		c = infix.pop()
 		
-	for i in range(0,len(operatorStack)):
-		outputQueue.append(operatorStack.pop())
+		if c == '(':
+			opers.append(c)
+		elif c == ')':
+			# Pop the operators stack until you find an '('.
+			while opers[-1] != '(':
+				postfix.append(opers.pop())
+			# Get rid of the '('
+			opers.pop()
+		elif c in prec:
+			# Push any perators on the opers stack with higher precedence than current
+			while opers and prec[c] < prec[opers[-1]]:
+				postfix.append(opers.push())
+			opers.append(c)
+		else:
+			postfix.append(c)
 	
-	print("New Output Queue")
-	for token in outputQueue:
-		print(token)
+	#pop all operators to the output.
+	while opers:
+		postfix.append(opers.pop())
 	
 	
 	
+	
+	# Convert output list to string.
+	postfix = ''.join(postfix)
+	
+	# Print the result.
+	print("Output is " +postfix)
 	
 runFunction()
-
