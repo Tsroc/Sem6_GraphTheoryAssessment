@@ -1,7 +1,6 @@
 # author: Eoin Wilkie
 # classes used in Thompson's Construction
-# Research: https://www.youtube.com/watch?v=OSHXxulvH04   https://kean.github.io/post/lets-build-regex		https://swtch.com/~rsc/regexp/regexp1.html
-# https://github.com/xysun/regex/blob/master/parse.py
+
 class State:
 	"""	A state with one or two arrows, all edges labled by a label. """
 	
@@ -35,7 +34,7 @@ def shunt(infix):
 	postfix = []
 	
 	# Operator List
-	prec = {'*': 100, '.': 80, '+': 70, '?': 70, '|': 60, ')': 40, '(': 40}
+	prec = {'*': 100, '.': 80, '|': 60, ')': 40, '(': 20}
 	
 	# Loop though the input one character at a time.
 	#while c := infix.pop():
@@ -82,8 +81,6 @@ def compile(infix):
 		c = postfix.pop()
 		
 		if c == '.':
-			# Catenation
-			
 			# Pop 2 fragments off the stack
 			frag1 = nfa_stack.pop()
 			frag2 = nfa_stack.pop()
@@ -92,10 +89,7 @@ def compile(infix):
 			# Create new start and accept states
 			start = frag2.start
 			accept = frag1.accept
-			
 		elif c == '|':
-			# Alternation
-			
 			# Pop 2 fragments off the stack
 			frag1 = nfa_stack.pop()
 			frag2 = nfa_stack.pop()
@@ -105,10 +99,7 @@ def compile(infix):
 			# Point the old accept state to the new one
 			frag2.accept.edges.append(accept)
 			frag1.accept.edges.append(accept)
-			
 		elif c == '*':
-			# Zero or More
-			
 			# Pop a single fragment of the stack.
 			frag = nfa_stack.pop()
 			# Create new start and accept states
@@ -116,45 +107,6 @@ def compile(infix):
 			start = State(edges=[frag.start, accept])
 			# Point the arrows
 			frag.accept.edges = [frag.start, accept]
-			
-		elif c == '?':
-			# Zero or One
-			'''
-				It is my understanding that the way this works is,
-				Start state is the entry point, in this case there are 2 branches
-				The first is one: meaning it should accept the fragment (the character which comes after the '?' symbol
-				The second is zero: meaning there is no matches to this fragment
-				The accept state is simply dangling arrows pointing to nothing (yet), in this case both must be accept.
-				Meaning, regardless if there is zero or one, the next step is to have a dangling arrow.
-				
-				https://swtch.com/~rsc/regexp/regexp1.html : used to come to this understanding.
-			
-			'''
-			frag = nfa_stack.pop()
-			
-			accept = State()
-			start = State(edges = [frag.start, accept])
-			frag.accept.edges = [accept, accept]
-		
-		elif c == '+':
-			# One of More
-			'''
-				Similar logic as above.
-				Here there is 1 entry point, so start must always = frag.start.
-				There are 2 outputs, the first is pointing back at frag.start and 
-				the second is a dangling arrow.
-					
-				https://swtch.com/~rsc/regexp/regexp1.html : used to understand.
-			
-			'''
-			
-			# Pop a single fragment of the stack.
-			frag = nfa_stack.pop()
-			
-			accept = State()
-			start = frag.start
-			frag.accept.edges = [frag.start, accept]	
-
 		else:
 			accept = State()
 			start = State(label=c, edges=[accept])
@@ -223,30 +175,7 @@ if __name__ == "__main__":
 		["a.b|b*", "bbbbbb", True],
 		["a.b|b*", "bbx", False],
 		["a.b|b*", "ab", True],
-		#["a.b|b*", "abb", False],	# Returns AssertionError.
-		#["c|b", "bbbbbb", False],	# Returns AssertionError, uncertain what the issue is.
 		["b**", "", True],
-		
-		# '?' tests
-		["c?", "", True],
-		["c?", "c", True],
-		["c?", "cc", False],
-		["c?|a", "a", True],
-		["c?|a", "c", True],
-		["c?|b*", "bb", True],
-		#["c?|b", "bbbbbb", False],	# Returns AssertionError, uncertain what the issue is.
-		#["c|b", "bbbbbb", False],	# Returns AssertionError, not related to the '?' implemmentation.
-									# Seems to be an error with '|' implementation.
-									
-		# '+' tests
-		["c+", "", False],
-		["c+", "c", True],
-		["c+", "cc", True],
-		["c+|a", "a", True],
-		["c+|a", "c", True],
-		["c+|b*", "bb", True],
-		["c+|b", "", False],	
-		
 	]
 	# Runs assertions for each test.
 	for test in tests:

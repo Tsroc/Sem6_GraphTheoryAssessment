@@ -1,5 +1,6 @@
 # author: Eoin Wilkie
 # classes used in Thompson's Construction
+# Research: https://www.youtube.com/watch?v=OSHXxulvH04   https://kean.github.io/post/lets-build-regex		https://swtch.com/~rsc/regexp/regexp1.html
 
 class State:
 	"""	A state with one or two arrows, all edges labled by a label. """
