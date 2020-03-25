@@ -12,7 +12,7 @@ this s represented by the State class.
 Contains the methods necessary for the Thompson's construction algorithm, shunt, compile, followes, match.
 This class will also run a series of assertion tests when run.\
 \
-shunt:\
+Shunt:\
 Represents the shunting yard algorithm. Adds operators to a stack called opers,
 otherwise characters are appended to the postfix list. Afterwards the opers stack is put onto the postfix list.\
 The list is returned as a string.\
@@ -24,10 +24,10 @@ The regex characters are turned into NFA fragments. Regex operators included are
 zero or more ('*'), zero or one ('?') and one or more ('+').\
 More information on compiling regex expressions found at https://swtch.com/~rsc/regexp/regexp1.html \
 \
-followes:\
+Followes:\
 Recursive function which adds a state to a set and follows all of the epsilon arrow.\
 \
-match:\
+Match:\
 Compiles the regex expression, loops through the string, if the label is equal to the character, add the state arrow to the current.\
 Returns true if a match is found and false if not.
 
