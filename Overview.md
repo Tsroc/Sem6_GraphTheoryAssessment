@@ -1,69 +1,31 @@
 # Grap Theory Project 2020
 Write a program in Python to execute regular expressions on strings using the Thompson's construction algorithm.
 
-# Structure
-The project is broken into 3 files.
-## NFA.py
-contains two classes, Fragment and State.\
-A Fragment class represents a nondeterministic finite automaton, a NFA has a start state and an accept state,
-this s represented by the State class.
-
-## Thompson.py
-Contains the methods necessary for the Thompson's construction algorithm, shunt, compile, followes, match.
-This class will also run a series of assertion tests when run.\
-\
-Shunt:\
-Represents the shunting yard algorithm. Adds operators to a stack called opers,
-otherwise characters are appended to the postfix list. Afterwards the opers stack is put onto the postfix list.\
-The list is returned as a string.\
-More information on the shunting yard algorithm found at https://brilliant.org/wiki/shunting-yard-algorithm/ \
-\
-Compile:\
-Compiles the regex input into the NFA.\
-The regex characters are turned into NFA fragments. Regex operators included are: catenation ('.'), alternation('|'), 
-zero or more ('*'), zero or one ('?') and one or more ('+').\
-More information on compiling regex expressions found at https://swtch.com/~rsc/regexp/regexp1.html \
-\
-Followes:\
-Recursive function which adds a state to a set and follows all of the epsilon arrow.\
-\
-Match:\
-Compiles the regex expression, loops through the string, if the label is equal to the character, add the state arrow to the current.\
-Returns true if a match is found and false if not.
-
-## Main.py
-Allows for the user to enter a regex and string into the command line in the following format [regex, string].
-Will accept 1 or 2 args. If 1 arg the string will be assumed to be empty.
-
-
-
-
-
-
-##Introduction\
+## Introduction
 This program is an implementation of Thompson’s Construction algorithm using Python.  Thompson’s Construction algorithm is a method of transforming a regular expression into an equivalent nondeterministic finite automaton (NFA). The NFA can then be used to perform pattern matching on strings.\
-The code in this repository is contained within 3 files.\
-1)	NFA.py, represents an NFA.\
-2)	Thompson.py, contains the methods necessary for the Thompson's construction algorithm.\
-3)	Main.py, Allows for the user to enter command line arguments.\
-\
+The code in this repository is contained within 3 files.
+1)	NFA.py, represents an NFA.
+2)	Thompson.py, contains the methods necessary for the Thompson's construction algorithm.
+3)	Main.py, Allows for the user to enter command line arguments.
+
+
 What is an automaton?\
-An automaton is a machine which performs a range of functions according to a predetermined set of coded instructions. Automata theory is the study of abstract machines and automata, as well as the computational problems that can be solved using them.\
+An automaton is a machine which performs a range of functions according to a predetermined set of coded instructions. Automata theory is the study of abstract machines and automata, as well as the computational problems that can be solved using them.
 The most standard variant, which is described above, is called a deterministic finite automaton (DFA). A DFA has the following components:\
-Input: An DFA that accepts only finite sequence of symbols.\
-States: An DFA that contains only a finite number of states.\
-Transition: For a given current state and an input symbol, an NFA can only jump to one state.\
-Acceptance: Input is either accepted or rejected.\
+1) Input: An DFA that accepts only finite sequence of symbols.
+2) States: An DFA that contains only a finite number of states.
+3) Transition: For a given current state and an input symbol, an NFA can only jump to one state.
+4) Acceptance: Input is either accepted or rejected.
+
 This program uses nondeterministic finite automaton (NFA) to compute a string of symbols. For each symbol it transitions to a new state until all inputs have been consumed. The machine can move to any combination of the states in the machine. In other words, the exact state to which the machine moves cannot be determined.\
 \
 How does an NFA differ from a DFA?\
-In short, a DFA can best be described as one machine, whereas an NFA is like multiple machines performing computational activities at the same time. String rejection is notably different. In a DFA, string rejection occurs when the terminating state is other than the accepting state. In an NFA, rejection occurs only when all branches of the NFA are dead. An NFA is less limited than a DFA, it will traverse many paths for a given set of inputs and it can have many possible next states.\
+In short, a DFA can best be described as one machine, whereas an NFA is like multiple machines performing computational activities at the same time. String rejection is notably different. In a DFA, string rejection occurs when the terminating state is other than the accepting state. In an NFA, rejection occurs only when all branches of the NFA are dead. An NFA is less limited than a DFA, it will traverse many paths for a given set of inputs and it can have many possible next states.
 
 
 What is a regular expression?\
-A regular expression (regex) is a text string which describes a search pattern. For example, any e-mail address can be found with the following regex\
-^ [A-Z0-9. _%+-] +@[A-Z0-9.-] +\. [A-Z] {2,} $\
-This allows the programmer to quickly search and find all e-mails. Regular expressions can be used to find just about any text pattern. \
+A regular expression (regex) is a text string which describes a search pattern. For example, any e-mail address can be found with the following regex ^ [A-Z0-9. _%+-] +@[A-Z0-9.-] +\. [A-Z] {2,} $ \
+This allows the programmer to quickly search and find all e-mails. Regular expressions can be used to find just about any text pattern.
 
 Converting a regular expression ((a.b) |c) * to an NFA:\
 The brackets maintain standard mathematical operator precedence.\
@@ -73,13 +35,14 @@ The decimal point symbol (.) represents concatenation. \
 The expression ((a.b) |c) * can be understood as accepting zero or many ab or c. \
 \
 This following will illustrate how an NFA builds complexity out of simplicity.\
-//== Insert img ==
+\
+![Regex To NFA](https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment/blob/master/img/RegexToNFA.png)
+
 \
 This program is created using the Python programming language. \
 \
 What is Python?\
-Python is an interpreted, dynamically typed, object-orientated programming language.  It has gained popularity due to its simple syntax and an emphasizes on code readability.  Because of this design philosophy it is one of the easier programming languages to learn. \
-Python also offers libraries, such as NumPy, an array processing package, OpenCV, a computer vision image processing package or TensorFlow, a machine learning library.  These libraries unlock the power of Python which is displayed through its widespread use in the areas of machine learning and big data. \
+Python is an interpreted, dynamically typed, object-orientated programming language.  It has gained popularity due to its simple syntax and an emphasizes on code readability.  Because of this design philosophy it is one of the easier programming languages to learn. Python also offers libraries, such as NumPy, an array processing package, OpenCV, a computer vision image processing package or TensorFlow, a machine learning library.  These libraries unlock the power of Python which is displayed through its widespread use in the areas of machine learning and big data. \
 \
 Installing Python\
 A python installation guide for various Operating Systems can be found at https://realpython.com/installing-python/ \
@@ -87,15 +50,13 @@ A python installation guide for various Operating Systems can be found at https:
 Running the program\
 The GitHub repository can be found at https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment.git \
 \
-The program is run from the Main.py file. The user may enter arguments in the following ways, \
-1)	Regex followed by the string to be compared with.\
-2)	Regex followed by an empty string.\
-3)	Command line tools, which are prefixed with --.\
+The program is run from the Main.py file. The user may enter arguments in the following ways,
+1)	Regex followed by the string to be compared with.
+2)	Regex followed by an empty string.
+3)	Command line tools, which are prefixed with --.
 
 \
-\
-
-##Test\
+## Test
 To run by the Thompson.py file. This file also contains necessary algorithms for the program.  Tests are run by calling 	if __name__ = "__main__" \
 This will run only if the class file is called with no arguments. This works because when Python reads a source file it will first define several variables, in this case the __name__ variable is assigned to the value “__main__”\
 \
@@ -106,14 +67,14 @@ One or many tests are run in combination with alternation and zero or many.\
 Tests are run by creating a data array and running a loop of assertion tests.\
 \
 \
-##Algorithm\
+## Algorithm
 \
 Shunt()\
 The Shunting Yard Algorithm is the first step in Thompson’s Construction Algorithm, it is used to convert infix expressions to postfix expressions.\
 The infix expression 4 + 18 / (9 − 3) would be converted to 4, 18, 9, 3, −, /, + \
 This is done by parsing a list and placing the symbols on a stack or queue. Operators are placed on the operator stack and non-operators are placed on the output queue. Afterwards the operator stack is placed onto the output queue.\
 \ 
-//== Insert img ==
+![Shunting Yard Algorithm](https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment/blob/master/img/ShuntingYard.png)
 
 
 Compile()\
@@ -129,7 +90,7 @@ Zero or Many: Like zero or one. If the fragment takes the path of the fragment f
 One of More: One fragment is taken from the queue. The new fragment created must have one start state and 2 accept states. The accept state must be the fragment from the queues start state and the accept state must be either the fragment from the queues start state or a new State. \
 In understanding this it is helpful to be able to visualise the NFA fragments. \
 \
- //== Insert img ==
+![NFA Diagram](https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment/blob/master/img/NFA_diagrams.png)
 
 
 Match()\
@@ -137,7 +98,7 @@ The match function will return true if the regular expression matches the string
 First the regex is compiled with the compile\
 \
 \
-##References\
+## References
 \
 https://cs.stanford.edu/people/eroberts/courses/soco/projects/2004-05/automata-theory/index.html \
 Explores the basics of automata theory, a classic automata problem, and some of the many applications of automata.\
@@ -159,4 +120,4 @@ Describes the several aspects of this project including regular expressions, fin
 \
 https://www.cs.unc.edu/~plaisted/comp455/slides/nfa2.2.pdf \
 Describes Nondeterministic Finite Automata and provides examples.\
-\
+
