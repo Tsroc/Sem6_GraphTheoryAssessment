@@ -55,7 +55,7 @@ The program is run from the Main.py file. The user may enter arguments in the fo
 2)	Regex followed by an empty string.
 3)	Command line tools, which are prefixed with --.
 
-\
+
 ## Test
 To run by the Thompson.py file. This file also contains necessary algorithms for the program.  Tests are run by calling 	if __name__ = "__main__" \
 This will run only if the class file is called with no arguments. This works because when Python reads a source file it will first define several variables, in this case the __name__ variable is assigned to the value “__main__”\
@@ -64,16 +64,14 @@ Tests are run to check for several scenarios, to test for catenation, catenation
 Zero or one tests are run in combination with alternation and zero or many.\
 One or many tests are run in combination with alternation and zero or many.\
 \
-Tests are run by creating a data array and running a loop of assertion tests.\
-\
-\
+Tests are run by creating a data array and running a loop of assertion tests.
+
 ## Algorithm
-\
 Shunt()\
 The Shunting Yard Algorithm is the first step in Thompson’s Construction Algorithm, it is used to convert infix expressions to postfix expressions.\
 The infix expression 4 + 18 / (9 − 3) would be converted to 4, 18, 9, 3, −, /, + \
 This is done by parsing a list and placing the symbols on a stack or queue. Operators are placed on the operator stack and non-operators are placed on the output queue. Afterwards the operator stack is placed onto the output queue.\
-\ 
+
 ![Shunting Yard Algorithm](https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment/blob/master/img/ShuntingYard.png)
 
 
@@ -88,16 +86,16 @@ Alternation: 2 fragments are taken from the queue. Logically, alternation means 
 Zero or One: One fragment is taken from the queue and similar logic to alternation is applied except rather than set accept states as an array of 2 fragments start state, it is set as an array of 1 fragment’s start state and a new empty state object. Accept state is set as an array of 2 new State objects. \
 Zero or Many: Like zero or one. If the fragment takes the path of the fragment from the queue, then it must always return to the start state of fragment to allow it to re-enter this fragment. This means that the start states are the same as above but the accept states are different, they must be an array of fragment’s start and a new State object.\
 One of More: One fragment is taken from the queue. The new fragment created must have one start state and 2 accept states. The accept state must be the fragment from the queues start state and the accept state must be either the fragment from the queues start state or a new State. \
-In understanding this it is helpful to be able to visualise the NFA fragments. \
-\
+In understanding this it is helpful to be able to visualise the NFA fragments.
+
 ![NFA Diagram](https://github.com/eoinwilkie/Sem6_GraphTheoryAssessment/blob/master/img/NFA_diagrams.png)
 
 
 Match()\
 The match function will return true if the regular expression matches the string input.\
-First the regex is compiled with the compile\
-\
-\
+First the regex is compiled with the compile.
+
+
 ## References
 \
 https://cs.stanford.edu/people/eroberts/courses/soco/projects/2004-05/automata-theory/index.html \
