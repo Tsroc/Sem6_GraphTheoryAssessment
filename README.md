@@ -1,4 +1,4 @@
-# Grap Theory Project 2020
+# Graph Theory Project 2020
 Write a program in Python to execute regular expressions on strings using the Thompson's construction algorithm.
 
 # Structure
@@ -6,7 +6,7 @@ The project is broken into 3 files.
 ## NFA.py
 contains two classes, Fragment and State.\
 A Fragment class represents a nondeterministic finite automaton, a NFA has a start state and an accept state,
-this s represented by the State class.
+this is represented by the State class.
 
 ## Thompson.py
 Contains the methods necessary for the Thompson's construction algorithm, shunt, compile, followes, match.
